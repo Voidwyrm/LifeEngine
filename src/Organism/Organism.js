@@ -248,8 +248,9 @@ class Organism {
         return true;
     }
 
-    harm() {
-        this.damage++;
+    harm(damageInput = 1) {
+        //console.log(damageInput);
+        this.damage += damageInput;
         if (this.damage >= this.maxHealth() || Hyperparams.instaKill) {
             this.die();
         }
