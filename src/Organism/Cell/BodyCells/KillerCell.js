@@ -18,10 +18,19 @@ class KillerCell extends BodyCell{
     }
 
     killNeighbor(n_cell) {
-        if(n_cell == null || n_cell.owner == null || n_cell.owner == this.org || !n_cell.owner.living || n_cell.state == CellStates.armor) 
+        if(n_cell == null || n_cell.owner == null || n_cell.owner == this.org || !n_cell.owner.living || (n_cell.state == CellStates.armor && Hyperparams.armorPiercing == 0)) {
             return;
+        }
+
+        //Insta-kill 1/2
         var is_hit = n_cell.state == CellStates.killer; // has to be calculated before death
-        n_cell.owner.harm();
+
+        //Damage
+        var armor = n_cell.state == CellStates.armor ? Hyperparams.armorPiercing : 1;
+        var damage = !Hyperparams.instaKill ? (Hyperparams.damageMultiplier * this.org.anatomy.cells.length**Hyperparams.damageExponent * armor) : null;
+        n_cell.owner.harm(damage);
+
+        //Insta-kill 2/2
         if (Hyperparams.instaKill && is_hit) {
             this.org.harm();
         }
