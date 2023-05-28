@@ -271,9 +271,27 @@ class ControlPanel {
         $('#rot-enabled').change(function() {
             Hyperparams.rotationEnabled = this.checked;
         });
+
+        // Damage
         $('#insta-kill').change(function() {
+            if (this.checked) {
+                $('.damage-in').css('display', 'none');
+            }
+            else {
+                $('.damage-in').css('display', 'block');
+            }
             Hyperparams.instaKill = this.checked;
         });
+        $('#damage-multiplier').change(function() {
+            Hyperparams.damageMultiplier = $('#damage-multiplier').val();
+        });
+        $('#damage-exponent').change(function() {
+            Hyperparams.damageExponent = $('#damage-exponent').val();
+        });
+        $('#armor-percent').change(function() {
+            Hyperparams.armorPiercing = 1 - $('#armor-percent').val()/100;
+        });
+
         $('#look-range').change(function() {
             Hyperparams.lookRange = $('#look-range').val();
         });
@@ -360,18 +378,25 @@ class ControlPanel {
         $('#food-prod-prob').val(Hyperparams.foodProdProb);
         $('#lifespan-multiplier').val(Hyperparams.lifespanMultiplier);
         $('#rot-enabled').prop('checked', Hyperparams.rotationEnabled);
-        $('#insta-kill').prop('checked', Hyperparams.instaKill);
-        $('#evolved-mutation').prop('checked', !Hyperparams.useGlobalMutability);
-        $('#add-prob').val(Hyperparams.addProb);
-        $('#change-prob').val(Hyperparams.changeProb);
-        $('#remove-prob').val(Hyperparams.removeProb);
         $('#movers-produce').prop('checked', Hyperparams.moversCanProduce);
         $('#food-blocks').prop('checked', Hyperparams.foodBlocksReproduction);
         $('#food-drop-rate').val(Hyperparams.foodDropProb);
         $('#extra-mover-cost').val(Hyperparams.extraMoverFoodCost);
         $('#look-range').val(Hyperparams.lookRange);
         $('#see-through-self').prop('checked', Hyperparams.seeThroughSelf);
+
+        // Damage
+        $('#armor-percent').val( (1 - Hyperparams.armorPiercing)*100 );
+        $('#insta-kill').prop('checked', Hyperparams.instaKill);
+        $('#damage-multiplier').prop('checked', Hyperparams.damageMultiplier);
+        $('#damage-exponent').prop('checked', Hyperparams.damageExponent);
+
+        // Mutation
+        $('#evolved-mutation').prop('checked', !Hyperparams.useGlobalMutability);
         $('#global-mutation').val(Hyperparams.globalMutability);
+        $('#add-prob').val(Hyperparams.addProb);
+        $('#change-prob').val(Hyperparams.changeProb);
+        $('#remove-prob').val(Hyperparams.removeProb);
 
         if (!Hyperparams.useGlobalMutability) {
             $('.global-mutation-in').css('display', 'none');
