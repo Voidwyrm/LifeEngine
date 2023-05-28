@@ -19,7 +19,10 @@ const Hyperparams = {
         this.foodBlocksReproduction = true;
         this.moversCanProduce = false;
 
-        this.instaKill = false;
+        this.instKill = false;
+        this.damageMultiplier = 1;
+        this.damageExponent = 0.5;
+        this.armorPiercing = 0;
 
         this.lookRange = 20;
         this.seeThroughSelf = false;
