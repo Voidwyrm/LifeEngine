@@ -205,54 +205,71 @@
 						<label for="food-prod-prob" title='The probability that a producer cell will produce food each tick.'>Probability of producing food:</label>
 						<input type="number" id="food-prod-prob" min=".001" max="100" value=4 step="1">
 						<br>
+						<label for="movers-produce" title='When on, movers can produce food from producer cells. When off, producer cells are disabled on mover organisms.'>Movers can produce food</label>
+						<input type="checkbox" id="movers-produce">
+						<br/>
+						<label for="extra-mover-cost" title='Additional food cost for movers to reproduce'>Extra mover reproduction cost:</label>
+						<input type="number" id="extra-mover-cost" value=0 max="1000" step="1">
+						<br>
+						<label for="food-drop-rate" title='Rate at which food is automatically generated and dropped in the world'>Auto food drop rate:</label>
+						<input type="number" id="food-drop-rate" value=0 max="1000">
+						<br>
+						<label for="food-blocks" title='When on, reproduction will fail if offspring intersect with food. When off, offspring will remove blocking food.'>Food blocks reproduction</label>
+						<input type="checkbox" id="food-blocks" checked>
+						<br>
 						<label for="lifespan-multiplier" title='An organism lives for this many ticks per cell in its body.'>Lifespan multiplier:</label>
 						<input type="number" id="lifespan-multiplier" min="1" max="10000" value=100 step="1">
-						<br>
-						<label for="rot-enabled" title='Organisms rotate when born and while moving.'>Rotation Enabled</label>
+					</div>
+					<div class='right-half'>
+						<label for="rot-enabled" title='Organisms rotate when born and while moving.'>Rotation Enabled:</label>
 						<input type="checkbox" id="rot-enabled" checked>
-						<br>
-						<label for="insta-kill" title='When on, killer cells immediatly kill organisms they touch. When off, organisms have as much health as they have cells and only take 1 damage from killer cells.'>One touch kill</label>
-						<input type="checkbox" id="insta-kill">
 						<br>
 						<label for="look-range" title='How far an eye cell can see (in number of cells)'>Look range:</label>
 						<input type="number" id="look-range" min="1" max="50" value=20 step="1">
 						<br>
 						<label for="see-through-self" title='Allows eyes to see through an organisms own cells'>See through self:</label>
 						<input type="checkbox" id="see-through-self">
+						<h4>Damage Calculation</h4>
+						<label for="armor-percent" title='Percentage of damage blocked by armor cells'>Armor Block Percent:</label>
+						<input type="number" id="armor-percent" min="0" max="100" value=100>
 						<br>
-						<label for="food-drop-rate" title='Rate at which food is automatically generated and dropped in the world'>Auto food drop rate:</label>
-						<input type="number" id="food-drop-rate" value=0 max="1000">
-						<br>
-						<label for="extra-mover-cost" title='Additional food cost for movers to reproduce'>Extra mover reproduction cost:</label>
-						<input type="number" id="extra-mover-cost" value=0 max="1000" step="1">
-
-						
+						<label for="insta-kill" title='When on, killer cells immediatly kill organisms they touch. When off, organisms have as much health as they have cells.'>One-Touch Kill:</label>
+						<input type="checkbox" id="insta-kill">
+						<div class="damage-in">
+							<label for="damage-multiplier" title='Increases or decreases the damage done by killer cells'>Damage Multiplier:</label>
+							<input type="number" id="damage-multiplier" min="0" max="100" value=1>
+							<br>
+							<label for="damage-exponent" title='Range: -1 to 1. Positive values favor larger organisms. Negative values favor smaller organisms.'>Scaling Exponent:</label>
+							<input type="number" id="damage-exponent" min="-1" max="1" value=0>
+						</div>
 					</div>
-					<div class='right-half'>
-						<button id='reset-rules'>Reset all controls</button>
+					<div class='third-column'>
 						<h4>Mutation Rate</h4>
 						<label for="evolved-mutation" title='When on, each organism has its own mutation rate that can increase or decrease. When off, all organisms have the same mutation rate.'>Use evolved mutation rate</label>
 						<input type="checkbox" id="evolved-mutation" checked> </br>
-						<label class="global-mutation-in" for="global-mutation">Global mutation rate: </label>
-						<input class="global-mutation-in" type="number" id="global-mutation" min="0" max="100" value=5 step="1">
+						<div class="global-mutation-in">
+							<label for="global-mutation">Global mutation rate: </label>
+							<input type="number" id="global-mutation" min="0" max="100" value=5 step="1">
+						</div>
 						<h4 title='When an organism mutates, it can choose from one of the following mutation types.'>Mutation Type Probabilities</h4>
 						<label for="add-prob" title='A new cell will stem from an existing one'>Add Cell:</label>
 						<input class="mut-prob" type="number" id="add-prob" min="0" max="100" value=33>
+						<br>
 						<label for="change-prob" title='A currently existing cell will change its color.'>Change Cell:</label>
 						<input class="mut-prob" type="number" id="change-prob" min="0" max="100" value=33>
+						<br>
 						<label for="remove-prob" title='An existing cell will be removed.'>Remove Cell:</label>
 						<input class="mut-prob" type="number" id="remove-prob" min="0" max="100" value=33>
-						<br/>
-						<label for="movers-produce" title='When on, movers can produce food from producer cells. When off, producer cells are disabled on mover organisms.'>Movers can produce food</label>
-						<input type="checkbox" id="movers-produce">
-						<br/>
-						<label for="food-blocks" title='When on, reproduction will fail if offspring intersect with food. When off, offspring will remove blocking food.'>Food blocks reproduction</label>
-						<input type="checkbox" id="food-blocks" checked>
 						<br>
+						
+						<!-- Save controls -->
 						<button id='save-controls' title="Save all Evolution Controls in a .json file">Save & Download</button>
-						<button id='load-controls' title="Load saved Evolution Controls with a .json file">Load</button>
 						<a id="download-el" style="display: none;"></a>
+						<!-- Load controls -->
+						<button id='load-controls' title="Load saved Evolution Controls with a .json file">Load</button>
 						<input id="upload-hyperparams" style="display: none;" type="file">
+						<!-- Reset controls -->
+						<button id='reset-rules'>Reset all controls</button>
 					</div>
 				</div>
 				<div id='stats' class='tab'>
